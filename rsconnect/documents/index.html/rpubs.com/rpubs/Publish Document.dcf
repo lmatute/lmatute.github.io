@@ -1,7 +1,7 @@
 name: Publish Document
 account: rpubs
 server: rpubs.com
-appId: https://api.rpubs.com/api/v1/document/207789/aacac4c05fc1446e80c8baab98c26198
-bundleId: https://api.rpubs.com/api/v1/document/207789/aacac4c05fc1446e80c8baab98c26198
-url: http://rpubs.com/lodewijk14/207789
-when: 1473360093.9761
+appId: https://api.rpubs.com/api/v1/document/207796/78d997355520425a945a0a28d8ed5f73
+bundleId: https://api.rpubs.com/api/v1/document/207796/78d997355520425a945a0a28d8ed5f73
+url: http://rpubs.com/publish/claim/207796/d4c59144d2e1442cbde5aa70026fc4d4
+when: 1473360741.56347
