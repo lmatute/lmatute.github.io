@@ -1,0 +1,120 @@
+---
+title       : Debt and Margins  
+subtitle    : The effect of debt on profit margins for S&P 500 companies
+author      : Luis Maute
+job         : 
+framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
+highlighter : highlight.js  # {highlight.js, prettify, highlight}
+hitheme     : tomorrow      # 
+widgets     : []            # {mathjax, quiz, bootstrap}
+mode        : selfcontained # {standalone, draft}
+knit        : slidify::knit2slides
+---
+
+
+## Background and definitions
+
+- This short presentation explores the relationship between debt to equity (D/E ) and profit margins of publicly traded companies
+- The analysis is limited to companies that belong to the Standard & Poor's 500 index.These are among the largest companies in North America 
+- The presentation only covers the exploratory part of the data
+- An accompanying shiny web app gives further details into the data
+- The initial data was downloaded from www.FinViz.com and serves to support this assignment only
+
+
+
+
+---
+## Description of the analysis
+- Covers companies that are members of the S & P 500 index (500 companies)
+- Companies with incomplete information were excluded, resulting in 397 companies
+- We explore the relationship of debt to net margins  by sector
+- To normalize the debt of companies the debt to equity ratio is used (ltdeb) instead of the dollar value of debt
+- To avoid outliers, in the graphs we have limited company's D/E ratios to 200% or lower
+
+### Definitions:
+- Mkt capitalization: refers to the total dollar market value of the company's outstanding shares ( mktcap)
+- Debt to equity ratio: refers to the relative proportion of shareholders' equity to debt(ltdeb)
+- Net Profit Margin: net proft divided by sales(pm)
+
+---
+
+## Data Summary
+```{r,echo=F,include=F,chache=F}
+
+# library(auxfunctions) # this function is used to convert ##% characters to ##
+library(dplyr)
+library(ggplot2)
+library(lattice)
+library(calibrate)
+library(caret)
+library(e1071)
+library(rpart)
+library(rpart.plot)
+library(tree)
+library(rattle)
+library(plotly)
+library(DT)
+library(knitr)
+
+
+# aux functions
+
+frompct<-function(x){
+        if (is.na(x)) return(x)
+        else
+                n=nchar(x)
+        if (substr(x,start=n,stop=n)=="%")
+                as.numeric(substr(x,start=1,stop=n-1))/100
+        else as.numeric(x)
+}
+
+
+# Load the data
+mydata<-read.csv('finviz.csv',sep = ",", na.strings = c("NA", "#DIV/0!", ""),
+                 stringsAsFactors = F, header = TRUE)
+mydata<-mydata[,c('Ticker','Sector','Market.Cap','LT.Debt.Equity','Gross.Margin','Operating.Margin','Profit.Margin')]
+
+
+# Pre-processing
+
+# Fix Headers, delete na's and fix pct - create dlypr table
+names(mydata)=c('ticker','sector','mktcap','D_E','gm','om','pm')
+mydata<-mydata[complete.cases(mydata),]
+mydata[,4:7]<-apply(mydata[,4:7],2,frompct)
+
+mydata<-tbl_df(mydata)
+mydata$sector<-factor(mydata$sector)
+sumbysector<-mydata %>% group_by(sector) %>% summarise (numberofstocks=length(D_E),median_mktcap=median(mktcap/1000), median_debt=median(D_E)*100,
+       median_gm=median(gm)*100,median_om=median(om)*100,median_pm=median(pm)*100)
+
+
+mydata2<-mydata %>% filter(D_E<200)
+p <- plot_ly(mydata2, x =factor(D_E*100) , color = sector, type = "box") %>% layout(
+        title = "Debt Distribution by Sector - D/E<200%",
+        xaxis = list(title = "Debt to Equity")
+)
+
+```
+
+``` {r,echo=F,include=T,fig.width=20,fig.height=8}
+kable(sumbysector %>% arrange(median_debt))
+
+```
+
+---
+
+## Distribution of debt by sector
+``` {r,echo=F,include=T,fig.width=6,fig.height=3}
+p
+p<-ggplot(mydata2,aes(factor(D_E*100),pm))+geom_point(aes(colour=sector))+facet_wrap(~sector)+
+        ggtitle('Profit Margin ~ Debt by Sector D/E <200 %')+xlab('Long term Debt')+ylab('Profit margin')
+p
+```
+
+Initial Observations:
+
+1. There is variability in levels of debt by sector. Basic Materials and Financials are among the sectors with the highest median Debt to Equity levels
+
+2. This variability in debt levels does not seem to have a clear corresponding relationship with profit margins. For the most part profit margins follow a horizontal band, independent of the levels of debt
+
+3. We conclude that debt, by itself, does not have a material impact in profit margins. 

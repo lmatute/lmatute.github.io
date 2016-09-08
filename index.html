@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Debt and Margins</title>
+  <meta charset="utf-8">
+  <meta name="description" content="Debt and Margins">
+  <meta name="author" content="Luis Maute">
+  <meta name="generator" content="slidify" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/default.css" media="all" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/phone.css" 
+    media="only screen and (max-device-width: 480px)" >
+  <link rel="stylesheet" href="libraries/frameworks/io2012/css/slidify.css" >
+  <link rel="stylesheet" href="libraries/highlighters/highlight.js/css/tomorrow.css" />
+  <base target="_blank"> <!-- This amazingness opens all links in a new tab. -->  <link rel=stylesheet href="./assets/css/ribbons.css"></link>
+
+  
+  <!-- Grab CDN jQuery, fall back to local if offline -->
+  <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.7.min.js"></script>
+  <script>window.jQuery || document.write('<script src="libraries/widgets/quiz/js/jquery.js"><\/script>')</script> 
+  <script data-main="libraries/frameworks/io2012/js/slides" 
+    src="libraries/frameworks/io2012/js/require-1.0.8.min.js">
+  </script>
+  
+  
+
+</head>
+<body style="opacity: 0">
+  <slides class="layout-widescreen">
+    
+    <!-- LOGO SLIDE -->
+        <slide class="title-slide segue nobackground">
+  <hgroup class="auto-fadein">
+    <h1>Debt and Margins</h1>
+    <h2>The effect of debt on profit margins for S&amp;P 500 companies</h2>
+    <p>Luis Maute<br/></p>
+  </hgroup>
+  <article></article>  
+</slide>
+    
+
+    <!-- SLIDES -->
+    <slide class="" id="slide-1" style="background:;">
+  <hgroup>
+    <h2>Background and definitions</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>This short presentation explores the relationship between debt to equity (D/E ) and profit margins of publicly traded companies</li>
+<li>The analysis is limited to companies that belong to the Standard &amp; Poor&#39;s 500 index.These are among the largest companies in North America </li>
+<li>The presentation only covers the exploratory part of the data</li>
+<li>An accompanying shiny web app gives further details into the data</li>
+<li>The initial data was downloaded from <a href="http://www.FinViz.com">www.FinViz.com</a> and serves to support this assignment only</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-2" style="background:;">
+  <hgroup>
+    <h2>Description of the analysis</h2>
+  </hgroup>
+  <article data-timings="">
+    <ul>
+<li>Covers companies that are members of the S &amp; P 500 index (500 companies)</li>
+<li>Companies with incomplete information were excluded, resulting in 397 companies</li>
+<li>We explore the relationship of debt to net margins  by sector</li>
+<li>To normalize the debt of companies the debt to equity ratio is used (ltdeb) instead of the dollar value of debt</li>
+<li>To avoid outliers, in the graphs we have limited company&#39;s D/E ratios to 200% or lower</li>
+</ul>
+
+<h3>Definitions:</h3>
+
+<ul>
+<li>Mkt capitalization: refers to the total dollar market value of the company&#39;s outstanding shares ( mktcap)</li>
+<li>Debt to equity ratio: refers to the relative proportion of shareholders&#39; equity to debt(ltdeb)</li>
+<li>Net Profit Margin: net proft divided by sales(pm)</li>
+</ul>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-3" style="background:;">
+  <hgroup>
+    <h2>Data Summary</h2>
+  </hgroup>
+  <article data-timings="">
+    <table><thead>
+<tr>
+<th align="left">sector</th>
+<th align="right">numberofstocks</th>
+<th align="right">median_mktcap</th>
+<th align="right">median_debt</th>
+<th align="right">median_gm</th>
+<th align="right">median_om</th>
+<th align="right">median_pm</th>
+</tr>
+</thead><tbody>
+<tr>
+<td align="left">Technology</td>
+<td align="right">63</td>
+<td align="right">19.28716</td>
+<td align="right">46.0</td>
+<td align="right">58.9</td>
+<td align="right">17.90</td>
+<td align="right">12.80</td>
+</tr>
+<tr>
+<td align="left">Industrial Goods</td>
+<td align="right">41</td>
+<td align="right">17.76298</td>
+<td align="right">66.0</td>
+<td align="right">30.7</td>
+<td align="right">12.60</td>
+<td align="right">8.70</td>
+</tr>
+<tr>
+<td align="left">Basic Materials</td>
+<td align="right">44</td>
+<td align="right">21.32035</td>
+<td align="right">70.0</td>
+<td align="right">36.1</td>
+<td align="right">5.25</td>
+<td align="right">1.80</td>
+</tr>
+<tr>
+<td align="left">Healthcare</td>
+<td align="right">41</td>
+<td align="right">25.67166</td>
+<td align="right">74.0</td>
+<td align="right">64.9</td>
+<td align="right">16.30</td>
+<td align="right">12.00</td>
+</tr>
+<tr>
+<td align="left">Consumer Goods</td>
+<td align="right">63</td>
+<td align="right">18.50646</td>
+<td align="right">77.0</td>
+<td align="right">38.9</td>
+<td align="right">12.50</td>
+<td align="right">8.20</td>
+</tr>
+<tr>
+<td align="left">Services</td>
+<td align="right">87</td>
+<td align="right">16.00509</td>
+<td align="right">78.0</td>
+<td align="right">37.3</td>
+<td align="right">11.70</td>
+<td align="right">7.20</td>
+</tr>
+<tr>
+<td align="left">Financial</td>
+<td align="right">38</td>
+<td align="right">16.49506</td>
+<td align="right">108.5</td>
+<td align="right">69.0</td>
+<td align="right">24.75</td>
+<td align="right">19.25</td>
+</tr>
+<tr>
+<td align="left">Utilities</td>
+<td align="right">22</td>
+<td align="right">20.17010</td>
+<td align="right">123.5</td>
+<td align="right">71.4</td>
+<td align="right">19.45</td>
+<td align="right">9.55</td>
+</tr>
+</tbody></table>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+<slide class="" id="slide-4" style="background:;">
+  <hgroup>
+    <h2>Distribution of debt by sector</h2>
+  </hgroup>
+  <article data-timings="">
+    <p><img src="assets/fig/unnamed-chunk-3-1.png" alt="plot of chunk unnamed-chunk-3"><img src="assets/fig/unnamed-chunk-3-2.png" alt="plot of chunk unnamed-chunk-3"></p>
+
+<p>Initial Observations:</p>
+
+<ol>
+<li><p>There is variability in levels of debt by sector. Basic Materials and Financials are among the sectors with the highest median Debt to Equity levels</p></li>
+<li><p>This variability in debt levels does not seem to have a clear corresponding relationship with profit margins. For the most part profit margins follow a horizontal band, independent of the levels of debt</p></li>
+<li><p>We conclude that debt, by itself, does not have a material impact in profit margins. </p></li>
+</ol>
+
+  </article>
+  <!-- Presenter Notes -->
+</slide>
+
+    <slide class="backdrop"></slide>
+  </slides>
+  <div class="pagination pagination-small" id='io2012-ptoc' style="display:none;">
+    <ul>
+      <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=1 title='Background and definitions'>
+         1
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=2 title='Description of the analysis'>
+         2
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=3 title='Data Summary'>
+         3
+      </a>
+    </li>
+    <li>
+      <a href="#" target="_self" rel='tooltip' 
+        data-slide=4 title='Distribution of debt by sector'>
+         4
+      </a>
+    </li>
+  </ul>
+  </div>  <!--[if IE]>
+    <script 
+      src="http://ajax.googleapis.com/ajax/libs/chrome-frame/1/CFInstall.min.js">  
+    </script>
+    <script>CFInstall.check({mode: 'overlay'});</script>
+  <![endif]-->
+</body>
+  <!-- Load Javascripts for Widgets -->
+  
+  <!-- LOAD HIGHLIGHTER JS FILES -->
+  <script src="libraries/highlighters/highlight.js/highlight.pack.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+  <!-- DONE LOADING HIGHLIGHTER JS FILES -->
+   
+  </html>
