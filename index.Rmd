@@ -1,7 +1,7 @@
 ---
 title       : Debt and Margins  
 subtitle    : The effect of debt on profit margins for S&P 500 companies
-author      : Luis Maute
+author      : Luis Matute
 job         : 
 framework   : io2012        # {io2012, html5slides, shower, dzslides, ...}
 highlighter : highlight.js  # {highlight.js, prettify, highlight}
